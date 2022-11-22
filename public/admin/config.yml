@@ -96,7 +96,7 @@ collections:
         name: "date"
         widget: "datetime"
         dateFormat: "YYYY-MM-DD"
-        timeFormat: "H HH"
+        timeFormat: "HH:mm"
       - label: Tags
         label_singular: "Tag"
         name: "tags"
