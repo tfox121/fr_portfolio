@@ -101,11 +101,11 @@ export const getStaticProps = async () => {
       });
       const mdxSource = await serialize(content, { scope: data });
       return {
-        title: data.title,
-        dateString: data.date,
-        slug: data.slug,
-        description: '',
-        tags: data.tags,
+        title: data.title || null,
+        dateString: data.date || null,
+        slug: data.slug || null,
+        description: data.description || null,
+        tags: data.tags || null,
         source: mdxSource,
       };
     }),
