@@ -75,19 +75,25 @@ collections:
     slug: "{{slug}}"
     identifier_field: slug
     summary: "{{title}}"
+    sortable_fields: ['slug', 'date', 'priority']
     fields:
       - label: "Slug"
         name: "slug"
         widget: "string"
+      - label: "Priority"
+        name: "priority"
+        widget: "number"
+        default: 100
+        min: 0
+        value_type: "int"
       - label: "Title"
         name: "title"
         widget: "string"
-      - label: "Publish Date"
+      - label: "Created On"
         name: "date"
         widget: "datetime"
-        format: "YYYY-MM-DD"
         dateFormat: "YYYY-MM-DD"
-        timeFormat: false
+        timeFormat: "H HH"
       - label: Tags
         label_singular: "Tag"
         name: "tags"
@@ -107,3 +113,4 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
+    
