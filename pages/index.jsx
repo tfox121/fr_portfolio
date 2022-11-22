@@ -106,7 +106,6 @@ export const getStaticProps = async () => {
         slug: data.slug,
         description: '',
         tags: data.tags,
-        author: data.author,
         source: mdxSource,
       };
     }),
