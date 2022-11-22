@@ -34,7 +34,7 @@ export default function Home({ tags, work }) {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <Box
         sx={{
           my: 4,
@@ -50,7 +50,7 @@ export default function Home({ tags, work }) {
         <Box my={3}>
           <Typography variant="p">{config.site_introduction}</Typography>
         </Box>
-        <Box mt={3}>
+        <Box>
           <Stack direction="row" spacing={1}>
             {tags.map((tag) => {
               const selected = selectedTags.includes(tag.slug);
@@ -61,51 +61,64 @@ export default function Home({ tags, work }) {
                   onClick={() => handleClick(tag.slug)}
                   color={selected ? 'primary' : 'secondary'}
                   variant={selected ? 'filled' : 'outlined'}
+                  sx={{
+                    padding: 0.5,
+                  }}
                 />
               );
             })}
           </Stack>
         </Box>
         <Box>
-          {work.map((item) => {
-            let tagEnabled = false;
-            item.scope.tags.forEach((tag) => {
-              if (selectedTags.includes(tag)) {
-                tagEnabled = true;
-              }
-            });
+          {work
+            .sort((a, b) => a.scope.priority - b.scope.priority)
+            .map((item) => {
+              let tagEnabled = false;
+              item.scope.tags.forEach((tag) => {
+                if (selectedTags.includes(tag)) {
+                  tagEnabled = true;
+                }
+              });
 
-            if (!tagEnabled) return null;
+              if (!tagEnabled) return null;
 
-            return (
-              <>
-                <Box key={item.scope.slug} my={2}>
-                  <Typography variant="h5" fontWeight={800} component="h2">
-                    {item.scope.title}
-                  </Typography>
-                  <MDXRemote {...item} scope={item.scope} />
-                  <Stack direction="row" spacing={1}>
-                    {item.scope.tags.map((tagSlug) => {
-                      const selected = selectedTags.includes(tagSlug);
-                      const tagName = tags.filter(
-                        (tag) => tag.slug === tagSlug,
-                      )[0].name;
-                      return (
-                        <Chip
-                          key={tagSlug}
-                          label={tagName}
-                          color={selected ? 'primary' : 'secondary'}
-                          variant={selected ? 'filled' : 'outlined'}
-                          size="small"
-                        />
-                      );
-                    })}
-                  </Stack>
-                </Box>
-                <Divider variant="middle" />
-              </>
-            );
-          })}
+              return (
+                <>
+                  <Box key={item.scope.slug} my={2}>
+                    <Typography variant="h5" fontWeight={800} component="h2">
+                      {item.scope.title}
+                    </Typography>
+                    <Typography variant="subtitle2">
+                      {item.scope.description}
+                    </Typography>
+                    <MDXRemote {...item} scope={item.scope} />
+                    <Stack direction="row" spacing={1}>
+                      {item.scope.tags.map((tagSlug) => {
+                        const selected = selectedTags.includes(tagSlug);
+                        const tagName = tags.filter(
+                          (tag) => tag.slug === tagSlug,
+                        )[0].name;
+                        return (
+                          <Chip
+                            key={tagSlug}
+                            label={tagName}
+                            color={selected ? 'primary' : 'secondary'}
+                            variant={selected ? 'filled' : 'outlined'}
+                            size="small"
+                            sx={{
+                              fontSize: 12,
+                              height: 26,
+                              padding: 0.5,
+                            }}
+                          />
+                        );
+                      })}
+                    </Stack>
+                  </Box>
+                  <Divider variant="middle" />
+                </>
+              );
+            })}
         </Box>
         <Box mt={4}>
           {/* TODO: make button link to config.linkedin_account_url */}
