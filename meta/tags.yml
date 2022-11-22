@@ -1,0 +1,9 @@
+tags:
+  - slug: news
+    name: News
+  - slug: feature
+    name: Feature
+  - slug: blog
+    name: Blog Post
+  - slug: review
+    name: Review

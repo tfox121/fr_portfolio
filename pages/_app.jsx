@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { UserContext, useNetlifyAuth } from '../hooks';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { UserContext, useNetlifyAuth } from '../src/hooks';
+import theme from '../src/theme';
 
 function MyApp({ Component, pageProps }) {
   const netlifyAuth = useNetlifyAuth();
@@ -11,9 +14,13 @@ function MyApp({ Component, pageProps }) {
   }, [isAuthenticated, initialize]);
 
   return (
-    <UserContext.Provider value={netlifyAuth}>
-      <Component {...pageProps} />
-    </UserContext.Provider>
+    <ThemeProvider theme={theme}>
+      <UserContext.Provider value={netlifyAuth}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <Component {...pageProps} />
+      </UserContext.Provider>
+    </ThemeProvider>
   );
 }
 

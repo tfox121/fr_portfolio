@@ -1,22 +1,119 @@
 backend:
   name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
-media_folder: public/img
-public_folder: img
+  branch: main
+media_folder: public/images
+public_folder: /images
+publish_mode: editorial_workflow
 collections:
-  - name: 'pages'
-    label: 'Pages'
+  - name: "config"
+    label: "Config"
+    delete: false
+    editor:
+      preview: false
     files:
-      - label: 'Home'
-        name: 'home'
-        file: 'content/home.md'
+      - name: "general"
+        label: "Site Config"
+        file: "config.json"
+        description: "General site settings"
         fields:
-          - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
-          - label: 'Cats'
-            name: 'cats'
+          - label: "URL"
+            name: "base_url"
+            widget: "string"
+            hint: "Do not enter the trailing slash of the URL"
+          - label: "Site title"
+            name: "site_title"
+            widget: "string"
+          - label: "Site description"
+            name: "site_description"
+            widget: "string"
+          - label: "Site introduction"
+            name: "site_introduction"
+            widget: "string"
+          - label: "Site keywords"
+            name: "site_keywords"
+            widget: "list"
+            summary: "{{fields.keyword.keyword}}"
+            field:
+              label: Keyword
+              name: keyword
+              widget: "string"
+          - label: "LinkedIn account"
+            name: "linkedin_account_url"
+            widget: "string"
+
+  - name: "meta"
+    label: "Meta"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "tags"
+        label: "Tags"
+        file: "meta/tags.yml"
+        description: "List of tags"
+        fields:
+          - name: tags
+            label: Tags
+            label_singular: "Tag"
             widget: list
             fields:
-              - { label: 'Name', name: 'name', widget: 'string' }
-              - { label: 'Description', name: 'description', widget: 'text' }
+              - label: "Slug"
+                name: "slug"
+                widget: "string"
+                hint: "The part of a URL identifies the tag"
+              - label: "Display Name"
+                name: "name"
+                widget: "string"
+                hint: "Tag name for displaying on the site"
+
+  - name: "work"
+    label: "Work"
+    folder: "content/work/"
+    extension: "mdx"
+    format: "frontmatter"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    summary: "{{title}}"
+    fields:
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        dateFormat: "YYYY-MM-DD"
+        timeFormat: false
+      - label: Author
+        name: "author"
+        widget: relation
+        collection: "meta"
+        file: "authors"
+        searchFields:
+          - "authors.*.name"
+        displayFields:
+          - "authors.*.name"
+        valueField: "authors.*.slug"
+      - label: Tags
+        label_singular: "Tag"
+        name: "tags"
+        widget: list
+        summary: "{{fields.tag}}"
+        field:
+          label: Tag
+          name: tag
+          widget: relation
+          collection: "meta"
+          file: "tags"
+          searchFields:
+            - "tags.*.name"
+          displayFields:
+            - "tags.*.name"
+          valueField: "tags.*.slug"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
