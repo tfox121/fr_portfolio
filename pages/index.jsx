@@ -8,6 +8,9 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { useState } from 'react';
 
 import config from '../config.json';
@@ -47,7 +50,7 @@ export default function Home({ tags, work }) {
         <Box my={3}>
           <Typography variant="p">{config.site_introduction}</Typography>
         </Box>
-        <Box>
+        <Box mt={3}>
           <Stack direction="row" spacing={1}>
             {tags.map((tag) => {
               const selected = selectedTags.includes(tag.slug);
@@ -63,10 +66,10 @@ export default function Home({ tags, work }) {
             })}
           </Stack>
         </Box>
-        <ul>
+        <Box>
           {work.map((item) => {
             let tagEnabled = false;
-            item.tags.forEach((tag) => {
+            item.scope.tags.forEach((tag) => {
               if (selectedTags.includes(tag)) {
                 tagEnabled = true;
               }
@@ -75,12 +78,41 @@ export default function Home({ tags, work }) {
             if (!tagEnabled) return null;
 
             return (
-              <li key={item.slug}>
-                <MDXRemote {...item.source} scope={item.source.scope} />
-              </li>
+              <>
+                <Box key={item.scope.slug} my={2}>
+                  <Typography variant="h5" fontWeight={800} component="h2">
+                    {item.scope.title}
+                  </Typography>
+                  <MDXRemote {...item} scope={item.scope} />
+                  <Stack direction="row" spacing={1}>
+                    {item.scope.tags.map((tagSlug) => {
+                      const selected = selectedTags.includes(tagSlug);
+                      const tagName = tags.filter(
+                        (tag) => tag.slug === tagSlug,
+                      )[0].name;
+                      return (
+                        <Chip
+                          key={tagSlug}
+                          label={tagName}
+                          color={selected ? 'primary' : 'secondary'}
+                          variant={selected ? 'filled' : 'outlined'}
+                          size="small"
+                        />
+                      );
+                    })}
+                  </Stack>
+                </Box>
+                <Divider variant="middle" />
+              </>
             );
           })}
-        </ul>
+        </Box>
+        <Box mt={4}>
+          {/* TODO: make button link to config.linkedin_account_url */}
+          <IconButton>
+            <LinkedInIcon fontSize="large" color="primary" />
+          </IconButton>
+        </Box>
       </Box>
     </Container>
   );
@@ -99,15 +131,11 @@ export const getStaticProps = async () => {
       const { content, data } = matter(source, {
         engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) },
       });
-      const mdxSource = await serialize(content, { scope: data });
-      return {
-        title: data.title || null,
-        dateString: data.date || null,
-        slug: data.slug || null,
-        description: data.description || null,
-        tags: data.tags || null,
-        source: mdxSource,
-      };
+      const mdxSource = await serialize(content, {
+        scope: data,
+        parseFrontmatter: true,
+      });
+      return mdxSource;
     }),
   );
   return {
