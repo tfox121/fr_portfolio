@@ -16,6 +16,7 @@ import { useState } from 'react';
 import config from '../config.json';
 import { listTags } from '../src/lib/tags';
 import { fetchPostContent, slugToPostContent } from '../src/lib/posts';
+import { ContactForm } from '../src/components';
 
 export default function Home({ tags, work }) {
   const [selectedTags, setselectedTags] = useState(tags.map((tag) => tag.slug));
@@ -120,6 +121,7 @@ export default function Home({ tags, work }) {
               );
             })}
         </Box>
+        <ContactForm />
         <Box mt={4}>
           {/* TODO: make button link to config.linkedin_account_url */}
           <IconButton>
