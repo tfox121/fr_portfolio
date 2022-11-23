@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import Container from '@mui/material/Container';
@@ -25,7 +26,6 @@ import { listTags } from '../src/lib/tags';
 import { fetchPostContent, slugToPostContent } from '../src/lib/posts';
 import { ContactForm } from '../src/components';
 import { UserContext } from '../src/hooks';
-import Link from 'next/link';
 
 export default function Home({ tags, work }) {
   const router = useRouter();
