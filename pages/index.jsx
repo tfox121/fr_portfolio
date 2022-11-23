@@ -188,7 +188,6 @@ export default function Home({ tags, work }) {
           </Box>
           <ContactForm />
           <Box mt={4}>
-            {/* TODO: make button link to config.linkedin_account_url */}
             <Link href={config.linkedin_account_url} target="_blank" passHref>
               <IconButton component="div">
                 <LinkedInIcon fontSize="large" color="primary" />
