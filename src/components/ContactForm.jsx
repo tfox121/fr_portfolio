@@ -70,7 +70,6 @@ function ContactForm() {
       maxWidth="400px"
       my={3}
       name="contact"
-      netlify="true"
     >
       <Typography variant="h5" component="h2" gutterBottom>
         Contact me
