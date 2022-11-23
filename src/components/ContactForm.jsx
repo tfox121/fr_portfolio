@@ -113,7 +113,7 @@ function ContactForm() {
                 required
               />
             </Grid>
-            {formState.length && formState !== 'pending' && (
+            {formState !== 'pending' && (
               <Grid item width="100%">
                 <Alert severity={formState}>
                   {errors.includes('failed')
