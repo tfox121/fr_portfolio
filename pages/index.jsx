@@ -33,7 +33,7 @@ export default function Home({ tags, work }) {
 
   return (
     <Box>
-      <SiteHead />
+      <SiteHead siteMetadata={config.site_metadata} />
       <AdminToolbar />
       <Container maxWidth="md">
         <Box
@@ -46,10 +46,10 @@ export default function Home({ tags, work }) {
           }}
         >
           <Typography variant="h4" component="h1">
-            {config.site_title}
+            {config.heading}
           </Typography>
           <Box my={3}>
-            <Typography variant="p">{config.site_introduction}</Typography>
+            <Typography variant="p">{config.introduction}</Typography>
           </Box>
           <Box>
             <Stack direction="row" spacing={1}>

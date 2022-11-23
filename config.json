@@ -1,7 +1,7 @@
 {
   "base_url": "https://zesty-pavlova-a7f461.netlify.app/",
   "site_metadata": {
-    "site_title": "Frances Richens",
+    "site_title": "Frances Richens - Portfolio",
     "site_author": "Frances Richens",
     "site_description": "A preview of my work",
     "site_keywords": [
@@ -16,6 +16,7 @@
       }
     ]
   },
+  "heading": "Frances Richens",
   "introduction": "Welcome to my site! I'm looking for work, please give me a job.",
   "linkedin_account_url": "https://www.linkedin.com/in/frances-richens-2246a429/"
 }

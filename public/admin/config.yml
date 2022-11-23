@@ -43,6 +43,9 @@ collections:
               label: Keyword
               name: keyword
               widget: "string"
+        - label: "Heading"
+          name: "heading"
+          widget: "string"
         - label: "Introduction"
           name: "introduction"
           widget: "string"
