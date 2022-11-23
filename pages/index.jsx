@@ -1,50 +1,26 @@
-import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import fs from 'fs';
-import yaml from 'js-yaml';
-import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
-import AppBar from '@mui/material/AppBar';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import config from '../config.json';
 import { listTags } from '../src/lib/tags';
-import { fetchPostContent, slugToPostContent } from '../src/lib/posts';
-import { ContactForm } from '../src/components';
-import { UserContext } from '../src/hooks';
+import { composedPostContent } from '../src/lib/posts';
+import {
+  AdminToolbar,
+  ContactForm,
+  SiteHead,
+  WorkItem,
+} from '../src/components';
 
 export default function Home({ tags, work }) {
-  const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState(null);
   const [selectedTags, setselectedTags] = useState(tags.map((tag) => tag.slug));
-  const { isAuthenticated, signout } = useContext(UserContext);
-
-  const siteKeywords = config.site_keywords.reduce((acc, currVal, index) => {
-    if (index === 0) return currVal.keyword;
-    return `${acc}, ${currVal.keyword}`;
-  }, '');
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const handleClick = (clickedTag) => {
     const selected = selectedTags.includes(clickedTag);
@@ -57,51 +33,8 @@ export default function Home({ tags, work }) {
 
   return (
     <Box>
-      <Head>
-        <title>{config.site_title}</title>
-        <meta name="description" content={config.site_description} />
-        <meta name="author" content={config.author} />
-        <meta name="keywords" content={siteKeywords} />
-      </Head>
-      {isAuthenticated && (
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
-            <Toolbar variant="dense">
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Admin
-              </Typography>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={() => router.push('/admin')}>Admin</MenuItem>
-                <MenuItem onClick={signout}>Logout</MenuItem>
-              </Menu>
-            </Toolbar>
-          </AppBar>
-        </Box>
-      )}
+      <SiteHead />
+      <AdminToolbar />
       <Container maxWidth="md">
         <Box
           sx={{
@@ -150,37 +83,11 @@ export default function Home({ tags, work }) {
 
               return (
                 <React.Fragment key={item.scope.slug}>
-                  <Box my={2}>
-                    <Typography variant="h5" fontWeight={800} component="h2">
-                      {item.scope.title}
-                    </Typography>
-                    <Typography variant="subtitle2">
-                      {item.scope.description}
-                    </Typography>
-                    <MDXRemote {...item} scope={item.scope} />
-                    <Stack direction="row" spacing={1}>
-                      {item.scope.tags.map((tagSlug) => {
-                        const selected = selectedTags.includes(tagSlug);
-                        const tagName = tags.filter(
-                          (tag) => tag.slug === tagSlug,
-                        )[0].name;
-                        return (
-                          <Chip
-                            key={tagSlug}
-                            label={tagName}
-                            color={selected ? 'primary' : 'secondary'}
-                            variant={selected ? 'filled' : 'outlined'}
-                            size="small"
-                            sx={{
-                              fontSize: 12,
-                              height: 26,
-                              padding: 0.5,
-                            }}
-                          />
-                        );
-                      })}
-                    </Stack>
-                  </Box>
+                  <WorkItem
+                    item={item}
+                    tags={tags}
+                    selectedTags={selectedTags}
+                  />
                   <Divider variant="middle" />
                 </React.Fragment>
               );
@@ -202,28 +109,11 @@ export default function Home({ tags, work }) {
 
 export const getStaticProps = async () => {
   const tags = listTags();
-  const work = fetchPostContent();
-  const workWithContents = await Promise.all(
-    work.map(async (item) => {
-      const { slug } = item;
-      const source = fs.readFileSync(
-        slugToPostContent(work)[slug].fullPath,
-        'utf8',
-      );
-      const { content, data } = matter(source, {
-        engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) },
-      });
-      const mdxSource = await serialize(content, {
-        scope: data,
-        parseFrontmatter: true,
-      });
-      return mdxSource;
-    }),
-  );
+  const work = await composedPostContent();
   return {
     props: {
       tags,
-      work: workWithContents,
+      work,
     },
   };
 };

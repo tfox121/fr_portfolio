@@ -1,4 +1,2 @@
-import useNetlifyAuth from './useNetlifyAuth';
-import UserContext from './UserContext';
-
-export { useNetlifyAuth, UserContext };
+export { default as useNetlifyAuth } from './useNetlifyAuth';
+export { default as UserContext } from './UserContext';

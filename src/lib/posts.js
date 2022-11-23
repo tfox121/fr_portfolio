@@ -2,6 +2,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
 import yaml from 'js-yaml';
+import { serialize } from 'next-mdx-remote/serialize';
 
 const postsDirectory = path.join(process.cwd(), 'content/work');
 
@@ -55,10 +56,30 @@ export function listPostContent(page, limit, tag) {
     .slice((page - 1) * limit, page * limit);
 }
 
-export const slugToPostContent = (postContents) => {
+export function slugToPostContent(postContents) {
   const hash = {};
   postContents.forEach((it) => {
     hash[it.slug] = it;
   });
   return hash;
-};
+}
+
+export async function composedPostContent() {
+  const work = fetchPostContent();
+  return Promise.all(
+    work.map((item) => {
+      const { slug } = item;
+      const source = fs.readFileSync(
+        slugToPostContent(work)[slug].fullPath,
+        'utf8',
+      );
+      const { content, data } = matter(source, {
+        engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) },
+      });
+      return serialize(content, {
+        scope: data,
+        parseFrontmatter: true,
+      });
+    }),
+  );
+}
