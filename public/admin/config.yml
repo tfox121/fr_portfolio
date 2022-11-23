@@ -1,6 +1,7 @@
 backend:
   name: git-gateway
   branch: main
+display_url: https://zesty-pavlova-a7f461.netlify.app/
 media_folder: public/images
 public_folder: /images
 publish_mode: editorial_workflow
@@ -22,6 +23,9 @@ collections:
             hint: "Do not enter the trailing slash of the URL"
           - label: "Site title"
             name: "site_title"
+            widget: "string"
+          - label: "Author"
+            name: "site_author"
             widget: "string"
           - label: "Site description"
             name: "site_description"
