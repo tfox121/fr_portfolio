@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -36,6 +37,9 @@ export default function Home({ tags, work }) {
 
   return (
     <Container maxWidth="md">
+      <Head>
+        <title>Frances Richens - Portfolio</title>
+      </Head>
       <Box
         sx={{
           my: 4,
