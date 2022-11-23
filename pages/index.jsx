@@ -25,6 +25,7 @@ import { listTags } from '../src/lib/tags';
 import { fetchPostContent, slugToPostContent } from '../src/lib/posts';
 import { ContactForm } from '../src/components';
 import { UserContext } from '../src/hooks';
+import Link from 'next/link';
 
 export default function Home({ tags, work }) {
   const router = useRouter();
@@ -188,9 +189,11 @@ export default function Home({ tags, work }) {
           <ContactForm />
           <Box mt={4}>
             {/* TODO: make button link to config.linkedin_account_url */}
-            <IconButton>
-              <LinkedInIcon fontSize="large" color="primary" />
-            </IconButton>
+            <Link href={config.linkedin_account_url} target="_blank" passHref>
+              <IconButton component="div">
+                <LinkedInIcon fontSize="large" color="primary" />
+              </IconButton>
+            </Link>
           </Box>
         </Box>
       </Container>
