@@ -24,6 +24,7 @@ collections:
         - label: "Site metadata"
           name: "site_metadata"
           widget: "object"
+          collapsed: true
           fields:
           - label: "Site title"
             name: "site_title"
