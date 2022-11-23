@@ -11,7 +11,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 import config from '../config.json';
 import { listTags } from '../src/lib/tags';
-import { composedPostContent } from '../src/lib/posts';
+import { composedWorkContent } from '../src/lib/work';
 import {
   AdminToolbar,
   ContactForm,
@@ -109,7 +109,7 @@ export default function Home({ tags, work }) {
 
 export const getStaticProps = async () => {
   const tags = listTags();
-  const work = await composedPostContent();
+  const work = await composedWorkContent();
   return {
     props: {
       tags,
