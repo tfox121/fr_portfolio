@@ -83,7 +83,7 @@ function ContactForm() {
                 label="Your Name"
                 type="text"
                 name="name"
-                value={name}
+                value={name || ''}
                 onChange={(e) => setName(e.target.value)}
                 error={errors.includes('name')}
                 fullWidth
@@ -94,7 +94,7 @@ function ContactForm() {
                 label="Your Email"
                 type="email"
                 name="email"
-                value={email}
+                value={email || ''}
                 onChange={(e) => setEmail(e.target.value)}
                 error={errors.includes('email')}
                 fullWidth
@@ -105,7 +105,7 @@ function ContactForm() {
               <TextField
                 label="Message"
                 name="message"
-                value={message}
+                value={message || ''}
                 onChange={(e) => setMessage(e.target.value)}
                 error={errors.includes('message')}
                 fullWidth
@@ -114,7 +114,7 @@ function ContactForm() {
                 required
               />
             </Grid>
-            {formState !== 'pending' && (
+            {formState.length && formState !== 'pending' && (
               <Grid item width="100%">
                 <Alert severity={formState}>
                   {errors.includes('failed')
