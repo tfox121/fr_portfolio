@@ -30,7 +30,7 @@ export default function Home({ tags, work }) {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedTags, setselectedTags] = useState(tags.map((tag) => tag.slug));
-  const { isAuthenticated, logout } = useContext(UserContext);
+  const { isAuthenticated, signout } = useContext(UserContext);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,7 +87,7 @@ export default function Home({ tags, work }) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={() => router.push('/admin')}>Admin</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuItem onClick={signout}>Logout</MenuItem>
               </Menu>
             </Toolbar>
           </AppBar>

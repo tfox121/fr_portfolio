@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffectOnceWhen } from 'rooks';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { UserContext, useNetlifyAuth } from '../src/hooks';
@@ -7,11 +7,11 @@ import theme from '../src/theme';
 function MyApp({ Component, pageProps }) {
   const netlifyAuth = useNetlifyAuth();
 
-  const { isAuthenticated, initialize } = netlifyAuth;
+  const { initialize } = netlifyAuth;
 
-  useEffect(() => {
+  useEffectOnceWhen(() => {
     initialize();
-  }, [isAuthenticated, initialize]);
+  });
 
   return (
     <ThemeProvider theme={theme}>
