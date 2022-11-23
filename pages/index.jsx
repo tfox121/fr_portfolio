@@ -32,6 +32,11 @@ export default function Home({ tags, work }) {
   const [selectedTags, setselectedTags] = useState(tags.map((tag) => tag.slug));
   const { isAuthenticated, signout } = useContext(UserContext);
 
+  const siteKeywords = config.site_keywords.reduce((acc, currVal, index) => {
+    if (index === 0) return currVal.keyword;
+    return `${acc}, ${currVal.keyword}`;
+  }, '');
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -52,7 +57,10 @@ export default function Home({ tags, work }) {
   return (
     <Box>
       <Head>
-        <title>Frances Richens - Portfolio</title>
+        <title>{config.site_title}</title>
+        <meta name="description" content={config.site_description} />
+        <meta name="author" content={config.author} />
+        <meta name="keywords" content={siteKeywords} />
       </Head>
       {isAuthenticated && (
         <Box sx={{ flexGrow: 1 }}>
