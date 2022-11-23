@@ -17,10 +17,14 @@ collections:
         file: "config.json"
         description: "General site settings"
         fields:
-          - label: "URL"
-            name: "base_url"
-            widget: "string"
-            hint: "Do not enter the trailing slash of the URL"
+        - label: "URL"
+          name: "base_url"
+          widget: "string"
+          hint: "Do not enter the trailing slash of the URL"
+        - label: "Site metadata"
+          name: "site_metadata"
+          widget: "object"
+          fields:
           - label: "Site title"
             name: "site_title"
             hint: "Displays in search results and on the browser tab"
@@ -39,12 +43,12 @@ collections:
               label: Keyword
               name: keyword
               widget: "string"
-          - label: "Introduction"
-            name: "introduction"
-            widget: "string"
-          - label: "LinkedIn account"
-            name: "linkedin_account_url"
-            widget: "string"
+        - label: "Introduction"
+          name: "introduction"
+          widget: "string"
+        - label: "LinkedIn account"
+          name: "linkedin_account_url"
+          widget: "string"
 
   - name: "meta"
     label: "Meta"
