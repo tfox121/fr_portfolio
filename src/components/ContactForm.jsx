@@ -14,11 +14,25 @@ function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [errors, setErrors] = useState([]);
-  const [errMsg, setErrMsg] = useState('');
 
-  const handleSubmit = (evt) => {
+  const [errors, setErrors] = useState([]);
+  const [formState, setFormState] = useState('pending');
+
+  const clearState = () => {
+    setName('');
+    setEmail('');
+    setMessage('');
+    setErrors([]);
+  };
+
+  const formMessages = {
+    error: 'Required fields missing.',
+    success: 'Message sent!',
+  };
+
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
+    setFormState('pending');
 
     const validationErrs = [];
     if (!email) validationErrs.push('email');
@@ -27,17 +41,23 @@ function ContactForm() {
     setErrors(validationErrs);
 
     if (validationErrs.length) {
-      setErrMsg('Required fields missing');
+      setFormState('error');
       return;
     }
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', name, email, message }),
-    })
-      .then(() => alert('Success!'))
-      .catch((error) => alert(error));
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({ 'form-name': 'contact', name, email, message }),
+      });
+      if (!res.ok) throw new Error(formMessages.error);
+      setFormState('success');
+      clearState();
+    } catch (error) {
+      setErrors([...errors, 'failed']);
+      setFormState('error');
+    }
   };
 
   return (
@@ -47,6 +67,8 @@ function ContactForm() {
       noValidate
       width="100%"
       my={3}
+      name="contact"
+      netlify="true"
     >
       <Grid container spacing={2}>
         <Grid item xs={0} md={3} />
@@ -90,11 +112,15 @@ function ContactForm() {
         </Grid>
         <Grid item xs={0} md={3} />
 
-        {errMsg && (
+        {formState !== 'pending' && (
           <>
             <Grid item xs={0} md={3} />
             <Grid item xs={12} md={6}>
-              <Alert severity="error">{errMsg}</Alert>
+              <Alert severity={formState}>
+                {errors.includes('failed')
+                  ? 'Message failed to send, please try again.'
+                  : formMessages[formState]}
+              </Alert>
             </Grid>
             <Grid item xs={0} md={3} />
           </>

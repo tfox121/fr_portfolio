@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -11,7 +12,6 @@ import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { useState } from 'react';
 
 import config from '../config.json';
 import { listTags } from '../src/lib/tags';
@@ -84,8 +84,8 @@ export default function Home({ tags, work }) {
               if (!tagEnabled) return null;
 
               return (
-                <>
-                  <Box key={item.scope.slug} my={2}>
+                <React.Fragment key={item.scope.slug}>
+                  <Box my={2}>
                     <Typography variant="h5" fontWeight={800} component="h2">
                       {item.scope.title}
                     </Typography>
@@ -117,7 +117,7 @@ export default function Home({ tags, work }) {
                     </Stack>
                   </Box>
                   <Divider variant="middle" />
-                </>
+                </React.Fragment>
               );
             })}
         </Box>
