@@ -38,13 +38,8 @@ export function fetchPostContent() {
 
       return matterData;
     });
-  // Sort posts by date
-  postCache = allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    }
-    return -1;
-  });
+  // Sort posts by priority
+  postCache = allPostsData.sort((a, b) => b.priority - a.priority);
   return postCache;
 }
 

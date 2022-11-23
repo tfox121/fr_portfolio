@@ -71,55 +71,53 @@ export default function Home({ tags, work }) {
           </Stack>
         </Box>
         <Box>
-          {work
-            .sort((a, b) => a.scope.priority - b.scope.priority)
-            .map((item) => {
-              let tagEnabled = false;
-              item.scope.tags.forEach((tag) => {
-                if (selectedTags.includes(tag)) {
-                  tagEnabled = true;
-                }
-              });
+          {work.map((item) => {
+            let tagEnabled = false;
+            item.scope.tags.forEach((tag) => {
+              if (selectedTags.includes(tag)) {
+                tagEnabled = true;
+              }
+            });
 
-              if (!tagEnabled) return null;
+            if (!tagEnabled) return null;
 
-              return (
-                <React.Fragment key={item.scope.slug}>
-                  <Box my={2}>
-                    <Typography variant="h5" fontWeight={800} component="h2">
-                      {item.scope.title}
-                    </Typography>
-                    <Typography variant="subtitle2">
-                      {item.scope.description}
-                    </Typography>
-                    <MDXRemote {...item} scope={item.scope} />
-                    <Stack direction="row" spacing={1}>
-                      {item.scope.tags.map((tagSlug) => {
-                        const selected = selectedTags.includes(tagSlug);
-                        const tagName = tags.filter(
-                          (tag) => tag.slug === tagSlug,
-                        )[0].name;
-                        return (
-                          <Chip
-                            key={tagSlug}
-                            label={tagName}
-                            color={selected ? 'primary' : 'secondary'}
-                            variant={selected ? 'filled' : 'outlined'}
-                            size="small"
-                            sx={{
-                              fontSize: 12,
-                              height: 26,
-                              padding: 0.5,
-                            }}
-                          />
-                        );
-                      })}
-                    </Stack>
-                  </Box>
-                  <Divider variant="middle" />
-                </React.Fragment>
-              );
-            })}
+            return (
+              <React.Fragment key={item.scope.slug}>
+                <Box my={2}>
+                  <Typography variant="h5" fontWeight={800} component="h2">
+                    {item.scope.title}
+                  </Typography>
+                  <Typography variant="subtitle2">
+                    {item.scope.description}
+                  </Typography>
+                  <MDXRemote {...item} scope={item.scope} />
+                  <Stack direction="row" spacing={1}>
+                    {item.scope.tags.map((tagSlug) => {
+                      const selected = selectedTags.includes(tagSlug);
+                      const tagName = tags.filter(
+                        (tag) => tag.slug === tagSlug,
+                      )[0].name;
+                      return (
+                        <Chip
+                          key={tagSlug}
+                          label={tagName}
+                          color={selected ? 'primary' : 'secondary'}
+                          variant={selected ? 'filled' : 'outlined'}
+                          size="small"
+                          sx={{
+                            fontSize: 12,
+                            height: 26,
+                            padding: 0.5,
+                          }}
+                        />
+                      );
+                    })}
+                  </Stack>
+                </Box>
+                <Divider variant="middle" />
+              </React.Fragment>
+            );
+          })}
         </Box>
         <ContactForm />
         <Box mt={4}>
