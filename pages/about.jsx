@@ -1,9 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import { PageHeading, SiteHead } from '../src/components';
+import { PageHeading, ResponsiveImage, SiteHead } from '../src/components';
 
 import config from '../config.json';
 
@@ -12,11 +11,11 @@ export default function About() {
     <Box my={4}>
       <SiteHead pageTitle="About" />
       <PageHeading />
-      <Box display="flex" justifyContent="center">
+      <Box display="flex" alignItems="center" flexDirection="column">
         <Typography variant="p" align="center">
           {config.about}
         </Typography>
-        <Image src={config.profile} position="relative" fill />
+        <ResponsiveImage src={config.profile} />
       </Box>
     </Box>
   );
