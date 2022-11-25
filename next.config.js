@@ -15,4 +15,7 @@ module.exports = {
     );
     return cfg;
   },
+  images: {
+    unoptimized: true,
+  },
 };
