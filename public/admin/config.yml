@@ -60,7 +60,6 @@ collections:
           name: "profile"
           widget: "image"
           allow_multiple: false
-          media_folder: "/public/images"
           hint: "On your /about page"
         - label: "LinkedIn account"
           name: "linkedin_account_url"
