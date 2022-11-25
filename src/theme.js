@@ -1,5 +1,10 @@
 import { createTheme } from '@mui/material/styles';
 import { IBM_Plex_Serif as IbmPlexSerif } from '@next/font/google';
+import NextLink from 'next/link';
+import { forwardRef } from 'react';
+
+// eslint-disable-next-line react/jsx-filename-extension
+const LinkBehaviour = forwardRef((props, ref) => <NextLink ref={ref} {...props} />);
 
 export const ibmPlexSerif = IbmPlexSerif({
   weight: ['300', '400', '500', '700'],
@@ -25,6 +30,18 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: ibmPlexSerif.style.fontFamily,
+  },
+  components: {
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehaviour,
+      },
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        LinkComponent: LinkBehaviour,
+      },
+    },
   },
 });
 
