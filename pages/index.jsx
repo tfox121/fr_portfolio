@@ -1,119 +1,46 @@
-import Link from 'next/link';
-import React, { useState } from 'react';
-import Container from '@mui/material/Container';
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
+import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
+import { SiteHead } from '../src/components';
 
 import config from '../config.json';
-import { listTags } from '../src/lib/tags';
-import { composedWorkContent } from '../src/lib/work';
-import {
-  AdminToolbar,
-  ContactForm,
-  SiteHead,
-  WorkItem,
-} from '../src/components';
 
-export default function Home({ tags, work }) {
-  const [selectedTags, setselectedTags] = useState(tags.map((tag) => tag.slug));
-
-  const handleClick = (clickedTag) => {
-    const selected = selectedTags.includes(clickedTag);
-    if (selected) {
-      setselectedTags(selectedTags.filter((tag) => tag !== clickedTag));
-      return;
-    }
-    setselectedTags([clickedTag, ...selectedTags]);
-  };
-
+export default function Home() {
   return (
-    <Box>
-      <SiteHead siteMetadata={config.site_metadata} />
-      <AdminToolbar />
-      <Container maxWidth="md">
-        <Box
-          sx={{
-            my: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant="h4" component="h1">
-            {config.heading}
-          </Typography>
-          <Box my={3}>
-            <Typography variant="p">{config.introduction}</Typography>
-          </Box>
-          <Box>
-            <Stack direction="row" spacing={1}>
-              {tags.map((tag) => {
-                const selected = selectedTags.includes(tag.slug);
-                return (
-                  <Chip
-                    key={tag.slug}
-                    label={tag.name}
-                    onClick={() => handleClick(tag.slug)}
-                    color={selected ? 'primary' : 'secondary'}
-                    variant={selected ? 'filled' : 'outlined'}
-                    sx={{
-                      padding: 0.5,
-                    }}
-                  />
-                );
-              })}
-            </Stack>
-          </Box>
-          <Box>
-            {work.map((item) => {
-              let tagEnabled = false;
-              item.scope.tags.forEach((tag) => {
-                if (selectedTags.includes(tag)) {
-                  tagEnabled = true;
-                }
-              });
-
-              if (!tagEnabled) return null;
-
-              return (
-                <React.Fragment key={item.scope.slug}>
-                  <WorkItem
-                    item={item}
-                    tags={tags}
-                    selectedTags={selectedTags}
-                  />
-                  <Divider variant="middle" />
-                </React.Fragment>
-              );
-            })}
-          </Box>
-          <ContactForm />
-          <Box mt={4}>
-            <Link href={config.linkedin_account_url} target="_blank" passHref>
-              <IconButton component="div">
-                <LinkedInIcon fontSize="large" color="primary" />
-              </IconButton>
-            </Link>
-          </Box>
-        </Box>
-      </Container>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100%',
+      }}
+    >
+      <SiteHead pageTitle="Home" />
+      <Box mb={2}>
+        <Typography variant="h2" component="h1">
+          {config.heading}
+        </Typography>
+      </Box>
+      <Box my={2}>
+        <Typography variant="p">{config.introduction}</Typography>
+      </Box>
+      <Box mt={2}>
+        <Stack direction="row" spacing={3}>
+          <Link href="/about" variant="h5">
+            About
+          </Link>
+          <Link href="/portfolio" variant="h5">
+            Portfolio
+          </Link>
+          <Link href="/contact" variant="h5">
+            Contact
+          </Link>
+        </Stack>
+      </Box>
     </Box>
   );
 }
-
-export const getStaticProps = async () => {
-  const tags = listTags();
-  const work = await composedWorkContent();
-  return {
-    props: {
-      tags,
-      work,
-    },
-  };
-};
