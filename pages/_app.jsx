@@ -2,7 +2,6 @@ import { useEffectOnceWhen } from 'rooks';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import Container from '@mui/material/Container';
 
 import { UserContext, useNetlifyAuth } from '../src/hooks';
 import { AdminToolbar } from '../src/components';
@@ -27,9 +26,7 @@ function MyApp({ Component, pageProps }) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <AdminToolbar />
-        <Container maxWidth="md" sx={{ height: '100%' }}>
-          <Component {...pageProps} />
-        </Container>
+        <Component {...pageProps} />
       </UserContext.Provider>
     </ThemeProvider>
   );
