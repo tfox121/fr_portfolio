@@ -71,7 +71,12 @@ export default function Portfolio({ tags, work }) {
         <Box width="100vw" position="absolute" left="0">
           <Container maxWidth="md">
             <Box display="flex" justifyContent="center" mb={1}>
-              <Stack direction="row" spacing={1}>
+              <Stack
+                direction="row"
+                spacing={1}
+                flexWrap="wrap"
+                justifyContent="center"
+              >
                 {tags.map((tag) => {
                   const selected = selectedTags.includes(tag.slug);
                   return (
@@ -83,6 +88,7 @@ export default function Portfolio({ tags, work }) {
                       variant={selected ? 'filled' : 'outlined'}
                       sx={{
                         padding: 0.5,
+                        mb: 1,
                       }}
                     />
                   );
