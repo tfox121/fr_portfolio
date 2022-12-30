@@ -14,17 +14,17 @@ export default function ResponsiveImage(props) {
       width: '375px',
     },
     '@media (min-width: 1200px)': {
-      height: '300px',
-      width: '450px',
+      height: '250px',
+      width: '375px',
     },
   };
   return (
-    <Box position="relative" mt={2} sx={styles}>
+    <Box position="relative" sx={styles}>
       <Image
         {...props}
         fill
         style={{
-          objectFit: 'contain',
+          // objectFit: 'contain',
           borderRadius: '1em',
         }}
       />
