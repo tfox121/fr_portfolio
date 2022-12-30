@@ -13,3 +13,7 @@ tags:
     name: Food
   - slug: finance
     name: Finance
+  - slug: education
+    name: Education
+  - slug: health
+    name: Health
