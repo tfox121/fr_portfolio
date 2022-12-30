@@ -21,7 +21,7 @@ import {
 
 export default function Portfolio({ tags, work }) {
   const [selectedTags, setselectedTags] = useState(tags.map((tag) => tag.slug));
-  const [selectedWork, setSelectedWork] = useState('ethics');
+  const [selectedWork, setSelectedWork] = useState('');
   const [viewingWork, setViewingWork] = useState(false);
 
   const handleTagClick = (clickedTag) => {
@@ -161,11 +161,13 @@ export default function Portfolio({ tags, work }) {
               mt: -5,
             }}
           >
-            <WorkItem
-              item={filterWork(work, selectedWork)[0]}
-              tags={tags}
-              selectedTags={selectedTags}
-            />
+            {selectedWork && (
+              <WorkItem
+                item={filterWork(work, selectedWork)[0]}
+                tags={tags}
+                selectedTags={selectedTags}
+              />
+            )}
           </Container>
         </Box>
       </Box>
