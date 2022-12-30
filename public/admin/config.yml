@@ -6,138 +6,137 @@ media_folder: public/images
 public_folder: /images
 publish_mode: editorial_workflow
 collections:
-  - name: "config"
-    label: "Config"
+  - name: 'config'
+    label: 'Config'
     delete: false
     editor:
       preview: false
     files:
-      - name: "general"
-        label: "Site Config"
-        file: "config.json"
-        description: "General site settings"
+      - name: 'general'
+        label: 'Site Config'
+        file: 'config.json'
+        description: 'General site settings'
         fields:
-        - label: "URL"
-          name: "base_url"
-          widget: "string"
-          hint: "Do not enter the trailing slash of the URL"
-        - label: "Site metadata"
-          name: "site_metadata"
-          widget: "object"
-          collapsed: true
-          fields:
-          - label: "Site title"
-            name: "site_title"
-            hint: "Displays in search results and on the browser tab"
-            widget: "string"
-          - label: "Site author"
-            name: "site_author"
-            widget: "string"
-          - label: "Site description"
-            name: "site_description"
-            widget: "string"
-          - label: "Site keywords"
-            name: "site_keywords"
-            widget: "list"
-            summary: "{{fields.keyword.keyword}}"
-            field:
-              label: Keyword
-              name: keyword
-              widget: "string"
-        - label: "Heading"
-          name: "heading"
-          widget: "string"
-          hint: "On every page"
-        - label: "Introduction"
-          name: "introduction"
-          widget: "string"
-          hint: "On your /home page"
-        - label: "About"
-          name: "about"
-          widget: "string"
-          hint: "On your /about page"
-        - label: "Profile picture"
-          name: "profile"
-          widget: "image"
-          allow_multiple: false
-          hint: "On your /about page"
-        - label: "LinkedIn account"
-          name: "linkedin_account_url"
-          widget: "string"
+          - label: 'URL'
+            name: 'base_url'
+            widget: 'string'
+            hint: 'Do not enter the trailing slash of the URL'
+          - label: 'Site metadata'
+            name: 'site_metadata'
+            widget: 'object'
+            collapsed: true
+            fields:
+              - label: 'Site title'
+                name: 'site_title'
+                hint: 'Displays in search results and on the browser tab'
+                widget: 'string'
+              - label: 'Site author'
+                name: 'site_author'
+                widget: 'string'
+              - label: 'Site description'
+                name: 'site_description'
+                widget: 'string'
+              - label: 'Site keywords'
+                name: 'site_keywords'
+                widget: 'list'
+                summary: '{{fields.keyword.keyword}}'
+                field:
+                  label: Keyword
+                  name: keyword
+                  widget: 'string'
+          - label: 'Heading'
+            name: 'heading'
+            widget: 'string'
+            hint: 'On every page'
+          - label: 'Introduction'
+            name: 'introduction'
+            widget: 'string'
+            hint: 'On your /home page'
+          - label: 'About'
+            name: 'about'
+            widget: 'markdown'
+            hint: 'On your /about page'
+          - label: 'Profile picture'
+            name: 'profile'
+            widget: 'image'
+            allow_multiple: false
+            hint: 'On your /about page'
+          - label: 'LinkedIn account'
+            name: 'linkedin_account_url'
+            widget: 'string'
 
-  - name: "meta"
-    label: "Meta"
+  - name: 'meta'
+    label: 'Meta'
     delete: false
     editor:
       preview: false
     files:
-      - name: "tags"
-        label: "Tags"
-        file: "meta/tags.yml"
-        description: "List of tags"
+      - name: 'tags'
+        label: 'Tags'
+        file: 'meta/tags.yml'
+        description: 'List of tags'
         fields:
           - name: tags
             label: Tags
-            label_singular: "Tag"
+            label_singular: 'Tag'
             widget: list
             fields:
-              - label: "Slug"
-                name: "slug"
-                widget: "string"
-                hint: "The part of a URL identifies the tag"
-              - label: "Display Name"
-                name: "name"
-                widget: "string"
-                hint: "Tag name for displaying on the site"
+              - label: 'Slug'
+                name: 'slug'
+                widget: 'string'
+                hint: 'The part of a URL identifies the tag'
+              - label: 'Display Name'
+                name: 'name'
+                widget: 'string'
+                hint: 'Tag name for displaying on the site'
 
-  - name: "work"
-    label: "Work"
-    folder: "content/work/"
-    extension: "mdx"
-    format: "frontmatter"
+  - name: 'work'
+    label: 'Work'
+    folder: 'content/work/'
+    extension: 'mdx'
+    format: 'frontmatter'
     create: true
-    slug: "{{slug}}"
+    slug: '{{slug}}'
     identifier_field: slug
-    summary: "{{priority}} - {{title}}"
+    summary: '{{priority}} - {{title}}'
     sortable_fields: ['priority', 'slug', 'date']
     fields:
-      - label: "Slug"
-        name: "slug"
-        widget: "string"
-      - label: "Priority"
-        name: "priority"
-        widget: "number"
+      - label: 'Slug'
+        name: 'slug'
+        widget: 'string'
+      - label: 'Priority'
+        name: 'priority'
+        widget: 'number'
         default: 100
         min: 0
-        value_type: "int"
-      - label: "Title"
-        name: "title"
-        widget: "string"
-      - label: "Description"
-        name: "description"
-        widget: "text"
-      - label: "Created On"
-        name: "date"
-        widget: "datetime"
-        dateFormat: "YYYY-MM-DD"
-        timeFormat: "HH:mm"
+        value_type: 'int'
+      - label: 'Title'
+        name: 'title'
+        widget: 'string'
+      - label: 'Description'
+        name: 'description'
+        widget: 'text'
+      - label: 'Created On'
+        name: 'date'
+        widget: 'datetime'
+        dateFormat: 'YYYY-MM-DD'
+        timeFormat: 'HH:mm'
       - label: Tags
-        label_singular: "Tag"
-        name: "tags"
+        label_singular: 'Tag'
+        name: 'tags'
         widget: list
-        summary: "{{fields.tag}}"
+        summary: '{{fields.tag}}'
         field:
           label: Tag
           name: tag
           widget: relation
-          collection: "meta"
-          file: "tags"
+          collection: 'meta'
+          file: 'tags'
           searchFields:
-            - "tags.*.name"
+            - 'tags.*.name'
           displayFields:
-            - "tags.*.name"
-          valueField: "tags.*.slug"
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
-    
+            - 'tags.*.name'
+          valueField: 'tags.*.slug'
+      - label: 'Body'
+        name: 'body'
+        widget: 'markdown'
