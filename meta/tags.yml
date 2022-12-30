@@ -3,7 +3,7 @@ tags:
     name: News
   - slug: feature
     name: Feature
-  - slug: blog
-    name: Blog Post
   - slug: review
     name: Review
+  - slug: arts-culture
+    name: arts & culture
