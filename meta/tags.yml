@@ -19,3 +19,5 @@ tags:
     name: Health
   - slug: arts-funding
     name: Arts funding
+  - slug: recipe
+    name: Recipe
