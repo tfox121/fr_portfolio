@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Box from '@mui/material/Box';
 import theme from '../theme';
 
-export default function ResponsiveImage({ src }) {
+export default function ResponsiveImage(props) {
   const styles = {
     [theme.breakpoints.down('sm')]: {
       height: '200px',
@@ -21,7 +21,7 @@ export default function ResponsiveImage({ src }) {
   return (
     <Box position="relative" mt={2} sx={styles}>
       <Image
-        src={src}
+        {...props}
         fill
         style={{
           objectFit: 'contain',
