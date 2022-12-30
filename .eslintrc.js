@@ -13,6 +13,9 @@ module.exports = {
     'prettier',
   ],
   plugins: ['import'],
+  parserOptions: {
+    ecmaVersion: 2020,
+  },
   rules: {
     'import/extensions': [
       'error',
