@@ -6,10 +6,10 @@ tags:
   - slug: review
     name: Review
   - slug: arts-culture
-    name: Arts & Culture
+    name: Arts & culture
   - slug: marketing
     name: Marketing copy
-  - slug: Food
+  - slug: food
     name: Food
   - slug: finance
     name: Finance
@@ -17,3 +17,5 @@ tags:
     name: Education
   - slug: health
     name: Health
+  - slug: arts-funding
+    name: Arts funding
