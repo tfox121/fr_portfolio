@@ -17,7 +17,11 @@ export default function About() {
           <Typography variant="p" align="center">
             {config.about}
           </Typography>
-          <ResponsiveImage src={config.profile} />
+          <ResponsiveImage
+            src={config.profile}
+            alt="Frances Richens"
+            priority
+          />
         </Box>
       </Box>
     </Container>
