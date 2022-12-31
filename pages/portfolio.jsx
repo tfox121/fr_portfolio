@@ -20,7 +20,7 @@ import {
 } from '../src/components';
 
 export default function Portfolio({ tags, work }) {
-  const [selectedTags, setselectedTags] = useState(tags.map((tag) => tag.slug));
+  const [selectedTags, setselectedTags] = useState([]);
   const [selectedWork, setSelectedWork] = useState('');
   const [viewingWork, setViewingWork] = useState(false);
 
@@ -99,7 +99,7 @@ export default function Portfolio({ tags, work }) {
               {work.map((item) => {
                 let tagEnabled = false;
                 item.scope.tags.forEach((tag) => {
-                  if (selectedTags.includes(tag)) {
+                  if (selectedTags.includes(tag) || !selectedTags.length) {
                     tagEnabled = true;
                   }
                 });
