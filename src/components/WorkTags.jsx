@@ -8,7 +8,7 @@ export default function WorkTags({ scope, tags, selectedTags }) {
     <Box mb={2}>
       <Stack direction="row" spacing={0.5}>
         {scope.tags.map((tagSlug) => {
-          const selected = selectedTags.includes(tagSlug);
+          const selected = selectedTags?.includes(tagSlug);
           if (!tags.filter((tag) => tag.slug === tagSlug)[0]) {
             throw new Error(
               `Tag "${tagSlug}" does not exist, try reapplying tags to work item ${scope.slug} and re-publish`,

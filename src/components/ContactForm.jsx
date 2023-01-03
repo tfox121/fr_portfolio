@@ -11,7 +11,7 @@ const encode = (data) =>
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join('&');
 
-function ContactForm() {
+export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -133,5 +133,3 @@ function ContactForm() {
     </Box>
   );
 }
-
-export default ContactForm;

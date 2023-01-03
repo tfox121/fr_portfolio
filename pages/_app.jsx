@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles
-        styles={{ body: { height: '100vh' }, '#__next': { height: '100%' } }}
+      // styles={{ body: { height: '100vh' }, '#__next': { height: '100%' } }}
       />
       <MDXProvider components={components}>
         <UserContext.Provider value={netlifyAuth}>

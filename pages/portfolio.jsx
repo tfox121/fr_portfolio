@@ -7,22 +7,18 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 
 import { listTags } from '../src/lib/tags';
 import { composedWorkContent } from '../src/lib/work';
 import {
   PageHeading,
   SiteHead,
-  WorkItem,
   WorkSummary,
   WorkTags,
 } from '../src/components';
 
 export default function Portfolio({ tags, work }) {
   const [selectedTags, setselectedTags] = useState([]);
-  const [selectedWork, setSelectedWork] = useState('');
-  const [viewingWork, setViewingWork] = useState(false);
 
   const handleTagClick = (clickedTag) => {
     const selected = selectedTags.includes(clickedTag);
@@ -33,43 +29,13 @@ export default function Portfolio({ tags, work }) {
     setselectedTags([clickedTag, ...selectedTags]);
   };
 
-  const handleClick = (workSlug) => {
-    setSelectedWork(workSlug);
-    setViewingWork(true);
-  };
-
-  const filterWork = (workArr, slug) =>
-    workArr.filter((item) => {
-      if (item.scope.slug === slug) return item;
-      return null;
-    });
-
   return (
-    <Box
-      pt={4}
-      width="100vw"
-      position="absolute"
-      sx={{
-        height: '100%',
-        overflowX: 'hidden',
-      }}
-    >
-      <SiteHead pageTitle="Portfolio" />
-      <Box position="sticky">
+    <Container maxWidth="md" sx={{ height: '100%' }}>
+      <Box my={4}>
+        <SiteHead pageTitle="Portfolio" />
         <PageHeading />
-      </Box>
-      <Box
-        width="200vw"
-        display="flex"
-        sx={{
-          position: 'absolute',
-          left: '0',
-          transform: viewingWork ? `translateX(-100vw)` : `translateX(0)`,
-          transition: 'transform 0.5s ease-out',
-        }}
-      >
-        <Box width="100vw" position="absolute" left="0">
-          <Container maxWidth="md">
+        <Box display="flex">
+          <Box>
             <Box display="flex" justifyContent="center" mb={1}>
               <Stack
                 direction="row"
@@ -119,9 +85,7 @@ export default function Portfolio({ tags, work }) {
                       </Grid>
                       <Grid item xs={1}>
                         <Box height="100%" display="flex" alignItems="center">
-                          <IconButton
-                            onClick={() => handleClick(item.scope.slug)}
-                          >
+                          <IconButton href={`portfolio/${item.scope.slug}`}>
                             <ArrowForwardIosIcon />
                           </IconButton>
                         </Box>
@@ -138,46 +102,10 @@ export default function Portfolio({ tags, work }) {
                 );
               })}
             </Box>
-          </Container>
-        </Box>
-        <Box
-          width="100vw"
-          position="absolute"
-          left="100vw"
-          sx={{
-            overflowY: !viewingWork && 'hidden',
-            height: viewingWork ? 'inherit' : '100vh',
-          }}
-        >
-          <Box
-            position="sticky"
-            left="100vw"
-            ml={5}
-            sx={{
-              top: 'calc(50vh - 2.5em)',
-            }}
-          >
-            <IconButton onClick={() => setViewingWork(false)}>
-              <ArrowBackIos />
-            </IconButton>
           </Box>
-          <Container
-            maxWidth="md"
-            sx={{
-              mt: -5,
-            }}
-          >
-            {selectedWork && (
-              <WorkItem
-                item={filterWork(work, selectedWork)[0]}
-                tags={tags}
-                selectedTags={selectedTags}
-              />
-            )}
-          </Container>
         </Box>
       </Box>
-    </Box>
+    </Container>
   );
 }
 
