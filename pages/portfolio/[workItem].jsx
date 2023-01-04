@@ -12,6 +12,7 @@ import { listTags } from '../../src/lib/tags';
 import { composedWorkContent } from '../../src/lib/work';
 import { PageHeading, SiteHead, WorkItem } from '../../src/components';
 import { useHistory, useWindowDimensions } from '../../src/hooks';
+import { pageTransition } from '../../src/lib/constants';
 
 export default function Work({ tags, work }) {
   const router = useRouter();
@@ -53,11 +54,7 @@ export default function Work({ tags, work }) {
       initial={useInitialTransition && { x: width, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={useExitTransition.current && { x: width, opacity: 0 }}
-      transition={{
-        type: 'spring',
-        stiffness: 260,
-        damping: 20,
-      }}
+      transition={pageTransition}
     >
       <Container maxWidth="md" sx={{ height: '100%' }}>
         <Box my={4}>
