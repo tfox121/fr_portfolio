@@ -74,7 +74,7 @@ export default function Portfolio({ tags, work }) {
           transition={pageTransition}
         >
           <Box display="flex">
-            <Box>
+            <Box width="100%">
               <Box display="flex" justifyContent="center" mb={1}>
                 <Stack
                   direction="row"
