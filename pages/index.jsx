@@ -18,7 +18,7 @@ export default function Home() {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          minHeight: '100%',
+          minHeight: '100vh',
         }}
       >
         <SiteHead pageTitle="Home" />
