@@ -51,7 +51,7 @@ export default function Work({ tags, work }) {
 
   return (
     <Container maxWidth="md" sx={{ height: '100%' }}>
-      <Box my={4}>
+      <Box py={4}>
         <SiteHead pageTitle={selectedWorkItem?.scope.title} />
         <Box position="sticky">
           <PageHeading />

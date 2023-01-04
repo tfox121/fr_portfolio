@@ -1,7 +1,11 @@
+import { useState, useEffect } from 'react';
+import Router from 'next/router';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 import { MDXProvider } from '@mdx-js/react';
 import { AnimatePresence } from 'framer-motion';
 
@@ -19,6 +23,22 @@ const components = {
 };
 
 function MyApp({ Component, pageProps, router }) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    Router.events.on('routeChangeStart', () => {
+      setIsLoading(true);
+    });
+
+    Router.events.on('routeChangeComplete', () => {
+      setIsLoading(false);
+    });
+
+    Router.events.on('routeChangeError', () => {
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles
@@ -29,6 +49,11 @@ function MyApp({ Component, pageProps, router }) {
           <UserProvider>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
+            {isLoading && (
+              <LinearProgress
+                sx={{ position: 'absolute', width: '100%', height: '0.2em' }}
+              />
+            )}
             <AdminToolbar />
             <AnimatePresence mode="wait" initial={false}>
               <Component {...pageProps} key={router.asPath} />
