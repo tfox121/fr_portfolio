@@ -20,6 +20,28 @@ export default function Work({ tags, work }) {
   const useExitTransition = useRef(false);
   const workItem = useRef(router.query.workItem);
   const { width } = useWindowDimensions();
+  const touchStart = useRef(null);
+  const touchEnd = useRef(null);
+
+  // the required distance between touchStart and touchEnd to be detected as a swipe
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    touchEnd.current = null;
+    touchStart.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchMove = (e) => {
+    touchEnd.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart.current || !touchEnd.current) return;
+    const distance = touchStart.current - touchEnd.current;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe || isRightSwipe) router.back();
+  };
 
   const useInitialTransition = useMemo(() => {
     if (history?.length > 1) {
@@ -62,7 +84,12 @@ export default function Work({ tags, work }) {
           exit={useExitTransition.current && { x: width, opacity: 0 }}
           transition={pageTransition}
         >
-          <Box display="flex">
+          <Box
+            display="flex"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
             <Box minWidth={50}>
               <Box position="fixed" top="50%">
                 <IconButton href="/portfolio">
