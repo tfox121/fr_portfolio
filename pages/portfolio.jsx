@@ -113,8 +113,8 @@ export default function Portfolio({ tags, work }) {
 
                   return (
                     <React.Fragment key={item.scope.slug}>
-                      <Grid container>
-                        <Grid item xs={11}>
+                      <Grid container columns={21}>
+                        <Grid item xs={20}>
                           <WorkSummary item={item} />
                           <WorkTags
                             scope={item.scope}
@@ -122,7 +122,7 @@ export default function Portfolio({ tags, work }) {
                             selectedTags={selectedTags}
                           />
                         </Grid>
-                        <Grid item xs={1}>
+                        <Grid item xs="auto">
                           <Box height="100%" display="flex" alignItems="center">
                             <IconButton href={`portfolio/${item.scope.slug}`}>
                               <ArrowForwardIosIcon />
