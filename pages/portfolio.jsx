@@ -63,16 +63,16 @@ export default function Portfolio({ tags, work }) {
   }, [history, router.events, router.pathname]);
 
   return (
-    <motion.div
-      initial={useInitialTransition && { x: -width, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={useExitTransition.current && { x: -width, opacity: 0 }}
-      transition={pageTransition}
-    >
-      <Container maxWidth="md" sx={{ height: '100%' }}>
-        <Box my={4}>
-          <SiteHead pageTitle="Portfolio" />
-          <PageHeading />
+    <Container maxWidth="md" sx={{ height: '100%' }}>
+      <Box my={4}>
+        <SiteHead pageTitle="Portfolio" />
+        <PageHeading />
+        <motion.div
+          initial={useInitialTransition && { x: -width, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={useExitTransition.current && { x: -width, opacity: 0 }}
+          transition={pageTransition}
+        >
           <Box display="flex">
             <Box>
               <Box display="flex" justifyContent="center" mb={1}>
@@ -143,9 +143,9 @@ export default function Portfolio({ tags, work }) {
               </Box>
             </Box>
           </Box>
-        </Box>
-      </Container>
-    </motion.div>
+        </motion.div>
+      </Box>
+    </Container>
   );
 }
 

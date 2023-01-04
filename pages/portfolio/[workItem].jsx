@@ -50,38 +50,33 @@ export default function Work({ tags, work }) {
   })[0];
 
   return (
-    <motion.div
-      initial={useInitialTransition && { x: width, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={useExitTransition.current && { x: width, opacity: 0 }}
-      transition={pageTransition}
-    >
-      <Container maxWidth="md" sx={{ height: '100%' }}>
-        <Box my={4}>
-          <SiteHead pageTitle={selectedWorkItem?.scope.title} />
-          <Box position="sticky">
-            <PageHeading />
-          </Box>
+    <Container maxWidth="md" sx={{ height: '100%' }}>
+      <Box my={4}>
+        <SiteHead pageTitle={selectedWorkItem?.scope.title} />
+        <Box position="sticky">
+          <PageHeading />
+        </Box>
+        <motion.div
+          initial={useInitialTransition && { x: width, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={useExitTransition.current && { x: width, opacity: 0 }}
+          transition={pageTransition}
+        >
           <Box display="flex">
-            <Box
-              position="sticky"
-              left="100vw"
-              ml={5}
-              sx={{
-                top: 'calc(50vh - 2.5em)',
-              }}
-            >
-              <IconButton href="/portfolio">
-                <ArrowBackIos />
-              </IconButton>
+            <Box minWidth={50}>
+              <Box position="fixed" top="50%">
+                <IconButton href="/portfolio">
+                  <ArrowBackIos />
+                </IconButton>
+              </Box>
             </Box>
             {work && selectedWorkItem && (
               <WorkItem item={selectedWorkItem} tags={tags} />
             )}
           </Box>
-        </Box>
-      </Container>
-    </motion.div>
+        </motion.div>
+      </Box>
+    </Container>
   );
 }
 
