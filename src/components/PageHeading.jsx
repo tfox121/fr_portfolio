@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import config from '../../config.json';
 
 function NavLink({ text, pathname, currentPath }) {
-  const isCurrentLocation = pathname === currentPath;
+  const isCurrentLocation = pathname === `/${currentPath.split('/')[1]}`;
   return (
     <Link
       href={pathname}
