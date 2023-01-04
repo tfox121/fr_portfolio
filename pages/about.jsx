@@ -12,7 +12,7 @@ import config from '../config.json';
 export default function About({ aboutMdx }) {
   return (
     <Container maxWidth="md" sx={{ height: '100%' }}>
-      <Box py={4}>
+      <Box py={5}>
         <SiteHead pageTitle="About" />
         <PageHeading />
         <Grid container columns={11}>

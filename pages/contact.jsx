@@ -7,7 +7,7 @@ import { ContactForm, PageHeading, SiteHead } from '../src/components';
 export default function Contact() {
   return (
     <Container maxWidth="md" sx={{ height: '100%' }}>
-      <Box py={4}>
+      <Box py={5}>
         <SiteHead pageTitle="Contact Me" />
         <PageHeading />
         <Box display="flex" justifyContent="center">
