@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { motion } from 'framer-motion';
 
 import { listTags } from '../../src/lib/tags';
@@ -18,10 +19,12 @@ export default function Work({ tags, work }) {
   const router = useRouter();
   const { history } = useHistory();
   const useExitTransition = useRef(false);
+  const containerRef = useRef(null);
   const workItem = useRef(router.query.workItem);
   const { width } = useWindowDimensions();
   const touchStart = useRef(null);
   const touchEnd = useRef(null);
+  const noMargin = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   // the required distance between touchStart and touchEnd to be detected as a swipe
   const minSwipeDistance = 50;
@@ -72,12 +75,19 @@ export default function Work({ tags, work }) {
   })[0];
 
   return (
-    <Container maxWidth="md" sx={{ height: '100%' }}>
+    <Container maxWidth="md" sx={{ height: '100%' }} ref={containerRef}>
       <Box py={5}>
         <SiteHead pageTitle={selectedWorkItem?.scope.title} />
         <Box position="sticky">
           <PageHeading />
         </Box>
+        {!noMargin && (
+          <Box position="fixed" top="2em" left="2em">
+            <IconButton href="/portfolio">
+              <ArrowBackIos />
+            </IconButton>
+          </Box>
+        )}
         <motion.div
           initial={useInitialTransition && { x: width, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -90,15 +100,12 @@ export default function Work({ tags, work }) {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
-            <Box minWidth={50}>
-              <Box position="fixed" top="50%">
-                <IconButton href="/portfolio">
-                  <ArrowBackIos />
-                </IconButton>
-              </Box>
-            </Box>
             {work && selectedWorkItem && (
-              <WorkItem item={selectedWorkItem} tags={tags} />
+              <WorkItem
+                item={selectedWorkItem}
+                tags={tags}
+                containerSize={containerRef?.current?.clientHeight}
+              />
             )}
           </Box>
         </motion.div>

@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 
 export default function WorkTags({ scope, tags, selectedTags }) {
   return (
-    <Box mb={2}>
+    <Box>
       <Stack direction="row" spacing={0.5}>
         {scope.tags.map((tagSlug) => {
           const selected = selectedTags?.includes(tagSlug);
