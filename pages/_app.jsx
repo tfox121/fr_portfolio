@@ -15,7 +15,7 @@ import theme from '../src/theme';
 
 const components = {
   p: (props) => (
-    <Typography gutterBottom variant="p" component="p">
+    <Typography variant="p" component="p" mb={2}>
       {props.children}
     </Typography>
   ),
