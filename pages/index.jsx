@@ -28,7 +28,9 @@ export default function Home() {
           </Typography>
         </Box>
         <Box my={2}>
-          <Typography variant="p">{config.introduction}</Typography>
+          <Typography variant="h6" component="h4">
+            {config.introduction}
+          </Typography>
         </Box>
         <Box mt={2}>
           <Stack direction="row" spacing={3}>
