@@ -40,14 +40,13 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles
-      // styles={{ body: { height: '100vh' }, '#__next': { height: '100%' } }}
-      />
       <MDXProvider components={components}>
         <HistoryProvider>
           <UserProvider>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
+            <GlobalStyles styles={{ body: { backgroundColor: '#f2f0e1' } }} />
+
             {isLoading && (
               <LinearProgress
                 sx={{ position: 'absolute', width: '100%', height: '0.2em' }}
