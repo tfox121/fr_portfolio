@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import { MDXProvider } from '@mdx-js/react';
 import { AnimatePresence } from 'framer-motion';
