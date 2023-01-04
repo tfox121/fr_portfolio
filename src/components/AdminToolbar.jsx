@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -9,12 +9,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import { UserContext } from '../hooks';
+import { useUser } from '../hooks';
 
 export default function AdminToolbar() {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
-  const { isAuthenticated, signout } = useContext(UserContext);
+  const { isAuthenticated, signout } = useUser();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

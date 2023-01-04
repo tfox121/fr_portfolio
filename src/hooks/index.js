@@ -1,3 +1,4 @@
 export { default as useNetlifyAuth } from './useNetlifyAuth';
-export { default as UserContext } from './UserContext';
+export { UserProvider, useUser } from './User';
+export { HistoryProvider, useHistory } from './History';
 export { default as useWindowDimensions } from './useWindowDimensions';
