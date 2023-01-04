@@ -13,10 +13,7 @@ function NavLink({ text, pathname, currentPath }) {
     <Link
       href={pathname}
       variant="subtitle1"
-      sx={{
-        fontStyle: isCurrentLocation && 'italic',
-      }}
-      underline={isCurrentLocation ? 'none' : 'always'}
+      underline={isCurrentLocation ? 'always' : 'hover'}
     >
       {text}
     </Link>
@@ -42,7 +39,7 @@ export default function PageHeading() {
   ];
 
   return (
-    <Box mb={4}>
+    <Box mb={3}>
       <Box>
         <Link href="/" underline="none">
           <Typography variant="h4" component="h1" align="center" gutterBottom>

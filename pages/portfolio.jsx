@@ -92,8 +92,10 @@ export default function Portfolio({ tags, work }) {
                         color={selected ? 'primary' : 'secondary'}
                         variant={selected ? 'filled' : 'outlined'}
                         sx={{
-                          padding: 0.5,
-                          mb: 1,
+                          '&&': {
+                            padding: 0.5,
+                            mb: 1,
+                          },
                         }}
                       />
                     );
@@ -113,8 +115,8 @@ export default function Portfolio({ tags, work }) {
 
                   return (
                     <React.Fragment key={item.scope.slug}>
-                      <Grid container columns={21}>
-                        <Grid item xs={20}>
+                      <Grid container columns={21} pb={1}>
+                        <Grid item xs={18} md={20}>
                           <WorkSummary item={item} />
                           <WorkTags
                             scope={item.scope}
@@ -122,7 +124,7 @@ export default function Portfolio({ tags, work }) {
                             selectedTags={selectedTags}
                           />
                         </Grid>
-                        <Grid item xs="auto">
+                        <Grid item xs={3} md={1}>
                           <Box height="100%" display="flex" alignItems="center">
                             <IconButton href={`portfolio/${item.scope.slug}`}>
                               <ArrowForwardIosIcon />
@@ -134,6 +136,7 @@ export default function Portfolio({ tags, work }) {
                         variant="middle"
                         light
                         sx={{
+                          my: 1,
                           mx: 15,
                         }}
                       />

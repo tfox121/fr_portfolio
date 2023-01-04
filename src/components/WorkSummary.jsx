@@ -5,7 +5,7 @@ import { Link } from '@mui/material';
 
 export default function WorkSummary({ item }) {
   return (
-    <Box my={1}>
+    <Box>
       <Link href={`/portfolio/${item.scope.slug}`} underline="hover">
         <Typography variant="h5" fontWeight={800} component="h2" gutterBottom>
           {item.scope.title}
