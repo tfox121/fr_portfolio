@@ -45,8 +45,12 @@ function MyApp({ Component, pageProps, router }) {
           <UserProvider>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <GlobalStyles styles={{ body: { backgroundColor: '#f2f0e1' } }} />
-
+            <GlobalStyles
+              styles={{
+                body: { backgroundColor: '#f2f0e1' },
+                a: { textDecorationColor: '#94375d', color: '#94375d' },
+              }}
+            />
             {isLoading && (
               <LinearProgress
                 sx={{ position: 'absolute', width: '100%', height: '0.2em' }}
