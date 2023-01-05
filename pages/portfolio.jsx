@@ -8,6 +8,7 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { motion } from 'framer-motion';
 
 import { listTags } from '../src/lib/tags';
@@ -27,6 +28,7 @@ export default function Portfolio({ tags, work }) {
   const router = useRouter();
   const { history } = useHistory();
   const { width } = useWindowDimensions();
+  const isNarrowPage = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const handleTagClick = (clickedTag) => {
     const selected = selectedTags.includes(clickedTag);
@@ -116,7 +118,7 @@ export default function Portfolio({ tags, work }) {
                   return (
                     <React.Fragment key={item.scope.slug}>
                       <Grid container columns={21} pb={1}>
-                        <Grid item xs={18} md={20}>
+                        <Grid item xs={19} md={20}>
                           <WorkSummary item={item} />
                           <WorkTags
                             scope={item.scope}
@@ -124,10 +126,12 @@ export default function Portfolio({ tags, work }) {
                             selectedTags={selectedTags}
                           />
                         </Grid>
-                        <Grid item xs={3} md={1}>
+                        <Grid item xs={2} md={1}>
                           <Box height="100%" display="flex" alignItems="center">
                             <IconButton href={`portfolio/${item.scope.slug}`}>
-                              <ArrowForwardIosIcon />
+                              <ArrowForwardIosIcon
+                                fontSize={isNarrowPage ? 'small' : 'medium'}
+                              />
                             </IconButton>
                           </Box>
                         </Grid>
