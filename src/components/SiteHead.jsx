@@ -21,6 +21,7 @@ export default function SiteHead({ pageTitle }) {
       />
       <meta name="author" content={config.site_metadata.author} />
       <meta name="keywords" content={siteKeywords} />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
   );
 }
