@@ -47,7 +47,6 @@ function MyApp({ Component, pageProps, router }) {
             <CssBaseline />
             <GlobalStyles
               styles={{
-                body: { backgroundColor: '#f2f0e1' },
                 a: { textDecorationColor: '#94375d', color: '#94375d' },
               }}
             />

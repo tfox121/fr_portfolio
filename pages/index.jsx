@@ -8,6 +8,13 @@ import Container from '@mui/material/Container';
 import { SiteHead } from '../src/components';
 
 import config from '../config.json';
+import theme from '../src/theme';
+
+const links = [
+  { text: 'About', href: '/about' },
+  { text: 'Portfolio', href: '/portfolio' },
+  { text: 'Contact', href: '/contact' },
+];
 
 export default function Home() {
   return (
@@ -23,7 +30,11 @@ export default function Home() {
       >
         <SiteHead pageTitle="Home" />
         <Box mb={2}>
-          <Typography variant="h2" component="h1">
+          <Typography
+            variant="h2"
+            component="h1"
+            color={theme.palette.primary.main}
+          >
             {config.heading}
           </Typography>
         </Box>
@@ -34,15 +45,18 @@ export default function Home() {
         </Box>
         <Box mt={2}>
           <Stack direction="row" spacing={3}>
-            <Link href="/about" variant="h5">
-              About
-            </Link>
-            <Link href="/portfolio" variant="h5">
-              Portfolio
-            </Link>
-            <Link href="/contact" variant="h5">
-              Contact
-            </Link>
+            {links.map(({ text, href }) => (
+              <Link
+                href={href}
+                variant="h5"
+                sx={{
+                  textDecorationColor: theme.palette.secondary.contrastText,
+                  color: theme.palette.secondary.contrastText,
+                }}
+              >
+                {text}
+              </Link>
+            ))}
           </Stack>
         </Box>
       </Box>

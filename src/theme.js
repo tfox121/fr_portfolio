@@ -3,8 +3,10 @@ import { IBM_Plex_Serif as IbmPlexSerif } from '@next/font/google';
 import NextLink from 'next/link';
 import { forwardRef } from 'react';
 
-// eslint-disable-next-line react/jsx-filename-extension
-const LinkBehaviour = forwardRef((props, ref) => <NextLink ref={ref} {...props} />);
+const LinkBehaviour = forwardRef((props, ref) => (
+  // eslint-disable-next-line react/jsx-filename-extension
+  <NextLink ref={ref} {...props} />
+));
 
 export const ibmPlexSerif = IbmPlexSerif({
   weight: ['300', '400', '500', '700'],
@@ -16,16 +18,23 @@ export const ibmPlexSerif = IbmPlexSerif({
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#596843',
-      main: '#2f3d1b',
-      dark: '#0a1700',
-      contrastText: '#fff',
+      light: '#94375d',
+      main: '#630034',
+      dark: '#36000d',
+      contrastText: '#ffffff',
     },
     secondary: {
-      light: '#ff893f',
-      main: '#d6590b',
-      dark: '#9e2900',
-      contrastText: '#000',
+      light: '#ffffff',
+      main: '#f4f6f5',
+      dark: '#c1c3c2',
+      contrastText: '#000000',
+    },
+    background: {
+      default: '#f4f6f5',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#000000',
     },
   },
   typography: {

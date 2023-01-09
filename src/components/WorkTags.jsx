@@ -19,7 +19,7 @@ export default function WorkTags({ scope, tags, selectedTags }) {
             <Chip
               key={tagSlug}
               label={tagName}
-              color={selected ? 'primary' : 'secondary'}
+              color="primary"
               variant={selected ? 'filled' : 'outlined'}
               size="small"
               sx={{

@@ -91,7 +91,7 @@ export default function Portfolio({ tags, work }) {
                         key={tag.slug}
                         label={tag.name}
                         onClick={() => handleTagClick(tag.slug)}
-                        color={selected ? 'primary' : 'secondary'}
+                        color="primary"
                         variant={selected ? 'filled' : 'outlined'}
                         sx={{
                           '&&': {
