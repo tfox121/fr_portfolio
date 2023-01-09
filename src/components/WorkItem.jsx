@@ -2,17 +2,14 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 import { MDXRemote } from 'next-mdx-remote';
 
 import WorkTags from './WorkTags';
-import { useWindowDimensions } from '../hooks';
 
-export default function WorkItem({ item, tags, selectedTags, containerSize }) {
+export default function WorkItem({ item, tags, selectedTags }) {
   const noMargin = useMediaQuery((theme) => theme.breakpoints.down('md'));
-  const { height } = useWindowDimensions();
 
   return (
     <Box my={2}>
@@ -36,13 +33,6 @@ export default function WorkItem({ item, tags, selectedTags, containerSize }) {
         </Box>
       </Box>
       <MDXRemote {...item} scope={item.scope} />
-      {noMargin && containerSize > height && (
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Button href="/portfolio" startIcon={<ArrowBackIos />}>
-            Back
-          </Button>
-        </Box>
-      )}
     </Box>
   );
 }

@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import fs from 'fs';
 import path from 'path';
 import { useRouter } from 'next/router';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -19,9 +20,9 @@ export default function Work({ tags, work }) {
   const router = useRouter();
   const { history } = useHistory();
   const useExitTransition = useRef(false);
-  const containerRef = useRef(null);
+  const [containerRef, setContainerRef] = useState();
   const workItem = useRef(router.query.workItem);
-  const { width } = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
   const noMargin = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const useInitialTransition = useMemo(() => {
@@ -53,7 +54,11 @@ export default function Work({ tags, work }) {
   })[0];
 
   return (
-    <Container maxWidth="md" sx={{ height: '100%' }} ref={containerRef}>
+    <Container
+      maxWidth="md"
+      sx={{ height: '100%' }}
+      ref={(newRef) => setContainerRef(newRef)}
+    >
       <Box py={5}>
         <SiteHead pageTitle={selectedWorkItem?.scope.title} />
         <Box position="sticky">
@@ -72,13 +77,16 @@ export default function Work({ tags, work }) {
           exit={useExitTransition.current && { x: width, opacity: 0 }}
           transition={pageTransition}
         >
-          <Box display="flex">
+          <Box display="flex" flexDirection="column">
             {work && selectedWorkItem && (
-              <WorkItem
-                item={selectedWorkItem}
-                tags={tags}
-                containerSize={containerRef?.current?.clientHeight}
-              />
+              <WorkItem item={selectedWorkItem} tags={tags} />
+            )}
+            {noMargin && containerRef?.clientHeight > height && (
+              <Box display="flex" justifyContent="center" alignItems="center">
+                <Button href="/portfolio" startIcon={<ArrowBackIos />}>
+                  Back
+                </Button>
+              </Box>
             )}
           </Box>
         </motion.div>
