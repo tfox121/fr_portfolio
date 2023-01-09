@@ -32,8 +32,8 @@ export default function Home() {
         <Box mb={2}>
           <Typography
             variant="h2"
-            component="h1"
             color={theme.palette.primary.main}
+            align="center"
           >
             {config.heading}
           </Typography>
