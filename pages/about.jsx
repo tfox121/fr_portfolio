@@ -7,7 +7,6 @@ import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 
 import { PageHeading, ResponsiveImage, SiteHead } from '../src/components';
-
 import config from '../config.json';
 
 export default function About({ aboutMdx }) {

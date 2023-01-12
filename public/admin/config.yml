@@ -61,6 +61,13 @@ collections:
             widget: 'image'
             allow_multiple: false
             hint: 'On your /about page'
+          - label: 'Contact me text'
+            name: 'contact_text'
+            widget: 'markdown'
+            hint: 'The text on your /contact page'
+          - label: 'Email address'
+            name: 'email_address'
+            widget: 'string'
           - label: 'LinkedIn account'
             name: 'linkedin_account_url'
             widget: 'string'
