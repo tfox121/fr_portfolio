@@ -134,7 +134,7 @@ collections:
         widget: list
         summary: '{{fields.tag}}'
         min: 1
-        default: 'marketing'
+        default: ['marketing']
         field:
           label: Tag
           name: tag
