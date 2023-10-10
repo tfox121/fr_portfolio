@@ -111,7 +111,6 @@ collections:
       - label: 'Slug'
         name: 'slug'
         widget: 'string'
-        hi
       - label: 'Priority'
         name: 'priority'
         widget: 'number'
