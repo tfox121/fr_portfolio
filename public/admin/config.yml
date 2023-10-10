@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   branch: main
-display_url: https://zesty-pavlova-a7f461.netlify.app/
+display_url: https://francesrichens.com/
 media_folder: public/images
 public_folder: /images
 publish_mode: editorial_workflow
@@ -134,6 +134,7 @@ collections:
         widget: list
         summary: '{{fields.tag}}'
         min: 1
+        default: 'marketing'
         field:
           label: Tag
           name: tag
