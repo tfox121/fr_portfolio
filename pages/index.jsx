@@ -47,6 +47,7 @@ export default function Home() {
           <Stack direction="row" spacing={3}>
             {links.map(({ text, href }) => (
               <Link
+                key={text}
                 href={href}
                 variant="h5"
                 sx={{
